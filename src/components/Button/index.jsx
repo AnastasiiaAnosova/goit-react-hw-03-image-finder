@@ -2,8 +2,6 @@ import React from 'react'
 
 const Button = () => {
 
-    const handleLoad = () => {
-    }
     return (
         <button onClick={this.handleLoad}>Load more</button>
     )
