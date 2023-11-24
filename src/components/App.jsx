@@ -1,13 +1,14 @@
 import { Component } from "react";
 import { fetchImagesWithQuery } from './services/api';
 import Searchbar from "./Searchbar";
-// import Loader from "./Loader";
 import ImageGallery from './ImageGallery';
 import Button from "./Button";
+import Loader from "./Loader";
+
 
 class App extends Component {
   state = {
-    images: [],
+    images: null,
     isLoading: false,
     error: null,
     largeImageURL: '',
@@ -31,7 +32,10 @@ class App extends Component {
       const { hits, totalHits } = await fetchImagesWithQuery(searchQuery, page);
       console.log('hits', hits);
       console.log('totalHits', totalHits);
-      this.setState({ images: hits });
+      this.setState((prev) => ({
+        images: prev.images ? [...prev.images, ...hits] : hits,
+        showLoadMore: page < Math.ceil(totalHits / 12),
+      }))
     } catch (error) {
       this.setState({ error });
       console.log('error>>>>>>', error)
@@ -41,24 +45,26 @@ class App extends Component {
   }
 
   handleSetSearchQuery = (searchQuery) => {
-    this.setState({ searchQuery });
-    this.resetPage();
-  }
-
-  resetPage = () => {
-    this.setState({ page: 1 })
+    this.setState({
+      searchQuery,
+      images: null,
+      page: 1,
+      showLoadMore: false,
+    });
   }
 
   handleloadNextImages = () => {
-
+    this.setState(prev => ({ page: prev.page + 1 }));
   }
-  render() {
 
+  render() {
+    const { images, isLoading, showLoadMore } = this.state;
     return (
       <>
         <Searchbar submit={this.handleSetSearchQuery} />
-        <ImageGallery images={this.state.images} />
-        <Button loadNextImages={this.handleloadNextImages} />
+        {isLoading && (<Loader />)}
+        {images && (<ImageGallery images={this.state.images} />)}
+        {showLoadMore && (<Button loadNextImages={this.handleloadNextImages} />)}
       </>
     )
   }
@@ -66,3 +72,28 @@ class App extends Component {
 }
 
 export default App;
+
+// render() {
+//   const { todo, filteredTodo, error, isLoading } = this.state;
+//   const { createTodo, filterTodo, handleDelete, handleCheck, handleClick } = this;
+//   return (
+//     <div className='container'>
+//       <button className='btn btn-success' onClick={handleClick}>Show all todo's</button>
+//       <FormCreateTodo createTodo={createTodo} />
+//       <FormFilterTodo filterTodo={filterTodo} />
+//       {isLoading && <h1>Loading...</h1>}
+//       {error && <h1>{error}</h1>}
+//       {todo && (
+//         <ul className='list-group'>
+//           {(filteredTodo ?? todo).map((el) => (
+//             <Todo
+//               todo={el}
+//               key={el.id}
+//               handleDelete={handleDelete}
+//               handleCheck={handleCheck}
+//             />
+//           ))}
+//         </ul>
+//       )}
+//     </div>
+//   )
