@@ -2,7 +2,8 @@ import { Component } from "react";
 import { fetchImagesWithQuery } from './services/api';
 import Searchbar from "./Searchbar";
 // import Loader from "./Loader";
-// import ImageGallery from './ImageGallery';
+import ImageGallery from './ImageGallery';
+import Button from "./Button";
 
 class App extends Component {
   state = {
@@ -15,14 +16,6 @@ class App extends Component {
     page: 1,
     showLoadMore: false,
   }
-
-  // componentDidUpdate(_, prevState) {
-  //   if (
-  //     this.state.searchQuery === prevState.searchQuery ||
-  //     this.state.page === prevState.page
-  //   ) return;
-  //   this.fetchImages();
-  // }
 
   componentDidUpdate(_, prevState) {
     if (
@@ -38,6 +31,7 @@ class App extends Component {
       const { hits, totalHits } = await fetchImagesWithQuery(searchQuery, page);
       console.log('hits', hits);
       console.log('totalHits', totalHits);
+      this.setState({ images: hits });
     } catch (error) {
       this.setState({ error });
       console.log('error>>>>>>', error)
@@ -55,11 +49,16 @@ class App extends Component {
     this.setState({ page: 1 })
   }
 
+  handleloadNextImages = () => {
+
+  }
   render() {
 
     return (
       <>
         <Searchbar submit={this.handleSetSearchQuery} />
+        <ImageGallery images={this.state.images} />
+        <Button loadNextImages={this.handleloadNextImages} />
       </>
     )
   }
