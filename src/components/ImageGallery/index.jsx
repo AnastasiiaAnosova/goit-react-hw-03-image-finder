@@ -1,18 +1,21 @@
 import ImageGalleryItem from "components/ImageGalleryItem";
+import { ImageGalleryContainer } from './ImageGallery.styled';
 
 
-const ImageGallery = ({ images }) => {
-    console.log('images', images);
+const ImageGallery = ({ images, toogleModal }) => {
+
     return (
-        <ul className="gallery">
+        <ImageGalleryContainer>
             {images.map(({ id, webformatURL, largeImageURL, tags }) => (
                 <ImageGalleryItem
                     key={id}
                     webformatURL={webformatURL}
                     largeImageURL={largeImageURL}
-                    alt={tags} />
+                    alt={tags}
+                    onClick={() => toogleModal(largeImageURL)}
+                />
             ))}
-        </ul>
+        </ImageGalleryContainer>
     )
 }
 

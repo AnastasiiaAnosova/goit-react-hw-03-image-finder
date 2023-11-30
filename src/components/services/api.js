@@ -17,9 +17,3 @@ export const fetchImagesWithQuery = async(searchQuery, page) => {
     );
     return data;
 }
-// export const fetchImagesWithQuery = async(searchQuery, page) => {
-//   const { data }= await axios.get(
-//         `${BASE_URL}?q=${searchQuery}&page=${page}`, { searchParams }
-//     );
-//     return data;
-// }

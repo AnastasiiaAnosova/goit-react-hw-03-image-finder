@@ -1,8 +1,9 @@
 import React from 'react'
+import { ImageGalleryItemImg } from './ImageGalleryItem.styled';
 
 const ImageGalleryItem = ({ webformatURL, alt }) => {
     return (
-        <img src={webformatURL} alt={alt} />
+        <ImageGalleryItemImg src={webformatURL} alt={alt} />
     )
 }
 

@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { SearchbarHeader, SearchForm, SearchFormButton, SearchFormInput } from './Searchbar.styled';
+import { IoSearch } from 'react-icons/io5';
 
 class Searchbar extends Component {
     state = {
@@ -17,44 +19,29 @@ class Searchbar extends Component {
 
     render() {
         return (
-            <>
-                <header className="searchbar">
-                    <form className="form" onSubmit={this.handleSubmit}>
-                        <button type="submit" className="button">
-                            <span className="button-label">Search</span>
-                            {/* <SearchIcon /> */}
-                        </button>
 
-                        <input
-                            className="input"
-                            type="text"
-                            name="searchQuery"
-                            autoComplete="off"
-                            autoFocus
-                            placeholder="Search images and photos"
-                            value={this.state.searchQuery}
-                            onChange={this.handleChange}
-                            required
-                        />
-                    </form>
-                </header>
-            </>
+            <SearchbarHeader >
+                <SearchForm onSubmit={this.handleSubmit}>
+                    <SearchFormButton type="submit">
+                        <IoSearch />
+                    </SearchFormButton>
+
+                    <SearchFormInput
+                        type="text"
+                        name="searchQuery"
+                        autoComplete="off"
+                        autoFocus
+                        placeholder="Search images and photos"
+                        value={this.state.searchQuery}
+                        onChange={this.handleChange}
+                        required
+                    />
+                </SearchForm>
+            </SearchbarHeader>
+
         )
     }
 }
 
 export default Searchbar;
 
-/**
- * <SearchFormStyled>
-  <FormBtn type="submit">
-    <FiSearch size="16px" />
-  </FormBtn>
-  <InputSearch
-    placeholder="What do you want to write?"
-    name="search"
-    required
-    autoFocus
-  />
-</SearchFormStyled>
- */
