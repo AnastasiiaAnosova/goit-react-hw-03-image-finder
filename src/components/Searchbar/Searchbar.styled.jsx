@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { IoSearch } from 'react-icons/io5';
 
 export const SearchbarHeader = styled.header`
     top: 0;
@@ -57,5 +58,9 @@ export const SearchFormInput = styled.input`
         font: inherit;
         font-size: 18px;
 }
+`;
+
+export const SearchFormIcon = styled(IoSearch)`
+  font-size: 24px;
 `;
 
