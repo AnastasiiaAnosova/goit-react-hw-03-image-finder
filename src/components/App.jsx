@@ -35,6 +35,7 @@ class App extends Component {
       this.setState((prev) => ({
         images: prev.images ? [...prev.images, ...hits] : hits,
         showLoadMore: page < Math.ceil(totalHits / 12),
+        // showLoadMore: page < Math.ceil(data.total_results / data.per_page),
       }))
     } catch (error) {
       this.setState({ error });
@@ -97,3 +98,29 @@ export default App;
 //       )}
 //     </div>
 //   )
+
+
+
+// ## Опис компонента галереї`<Grid/>`
+
+// Список карток зображень.Створює компонент наступної структури.
+
+// ```jsx
+// <Grid>
+//   {/*
+//     Набір <GridItem></GridItem> із зображеннями
+//     */}
+// </Grid>
+// ```
+
+// ## Опис компонента`<GridItem>`
+
+// Компонент елемента списку із зображенням.Створює компонент наступної структури.
+
+// ```jsx
+// <GridItem>
+//   <CardItem>
+//     <img src="" alt="" />
+//   </CardItem>
+// </GridItem>
+// ```
