@@ -1,11 +1,11 @@
 import { Component } from "react";
 import { fetchImagesWithQuery } from '../services/api';
-import Searchbar from "../Searchbar";
-import ImageGallery from '../ImageGallery';
-import Button from "../Button";
-import Loader from "../Loader";
+import Searchbar from "../Searchbar/Searchbar";
+import ImageGallery from '../ImageGallery/ImageGallery';
+import Button from "../Button/Button";
+import Loader from "../Loader/Loader";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import Modal from "../Modal";
+import Modal from "../Modal/Modal";
 import { AppContainer } from "./App.styled";
 
 
@@ -34,8 +34,8 @@ class App extends Component {
     try {
       this.setState({ isLoading: true });
       const { hits, totalHits } = await fetchImagesWithQuery(searchQuery, page);
-      console.log('hits', hits);
-      console.log('totalHits', totalHits);
+      console.log('hits in function fetchImages:', hits);
+      console.log('totalHits in function fetchImages:', totalHits);
       // hits.length === 12 ? Notify.success(`Hooray! We found ${totalHits} images.`) : Notify.warning(`Hm! We found only ${hits.length} images.`);
       if (hits.length === 12) {
         page === 1 && Notify.success(`Hooray! We found ${totalHits} images.`, {
@@ -81,7 +81,7 @@ class App extends Component {
 
   handleToogleModal = (url) => {
     this.setState((prev) => ({
-      showModal: !prev,
+      showModal: !prev.showModal,
       largeImageURL: url
     }));
   }

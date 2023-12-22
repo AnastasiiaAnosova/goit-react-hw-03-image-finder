@@ -1,4 +1,4 @@
-import ImageGalleryItem from "components/ImageGalleryItem";
+import ImageGalleryItem from "components/ImageGalleryItem/ImageGalleryItem";
 import { ImageGalleryContainer } from './ImageGallery.styled';
 
 
@@ -12,7 +12,7 @@ const ImageGallery = ({ images, toogleModal }) => {
                     webformatURL={webformatURL}
                     largeImageURL={largeImageURL}
                     alt={tags}
-                    onClick={() => toogleModal(largeImageURL)}
+                    onClick={toogleModal}
                 />
             ))}
         </ImageGalleryContainer>
