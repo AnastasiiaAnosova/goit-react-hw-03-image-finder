@@ -1,39 +1,34 @@
 import { Component } from "react";
 import { createPortal } from 'react-dom';
 
-import { Overlay, ModalImg } from './Modal.styled';
+import { Overlay, ModalStyles } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
 class Modal extends Component {
 
-    backDropClose = (e) => {
-        e.target === e.currentTarget && this.props.onClose()
-    }
-
-    handleEsc = (e) => {
-        e.code === 'Escape' && this.props.onClose()
-    }
     componentDidMount() {
-        document.addEventListener('keydown', this.handleEsc)
+        document.addEventListener('keydown', this.handleKeyEsc);
     }
 
     componentWillUnmount() {
-        document.removeEventListener('keydown', this.handleEsc)
+        document.removeEventListener('keydown', this.handleKeyEsc);
+    }
+
+    handleKeyEsc = (e) => {
+        if (e.code === 'Escape') this.props.toogleModal();
     }
 
     render() {
-        const { largeImageURL, alt } = this.props;
+        const { url, alt, toogleModal } = this.props;
         return createPortal(
-            <Overlay onClick={this.backDropClose}>
-                <ModalImg
-                    src={largeImageURL}
-                    alt={alt}
-                />
-            </Overlay >
+            <Overlay onClick={toogleModal}>
+                <ModalStyles>
+                    <img src={url} alt={alt} />
+                </ModalStyles>
+            </Overlay>
             , modalRoot)
     }
 }
 
-
-export default Modal
+export default Modal;

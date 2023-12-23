@@ -1,17 +1,16 @@
 import React from 'react'
-import { ImageGalleryItemStyles, ImageGalleryItemImgStyles } from './ImageGalleryItem.styled';
+import { ImageGalleryItemStyles, ImageGalleryItemImgStyles } from './ImageGalleryItem.styled'
 
-const ImageGalleryItem = ({ webformatURL, alt, onClick, largeImageURL }) => {
-
-    const handleClick = () => {
-        onClick(largeImageURL);
+const ImageGalleryItem = ({ webformatURL, alt, largeImageURL, toogleModal }) => {
+    const handleClickToImage = () => {
+        toogleModal(largeImageURL, alt);
     }
-
     return (
-        <ImageGalleryItemStyles>
-            <ImageGalleryItemImgStyles src={webformatURL} alt={alt} onClick={handleClick} />
+        <ImageGalleryItemStyles onClick={handleClickToImage}>
+            <ImageGalleryItemImgStyles src={webformatURL} alt={alt} />
         </ImageGalleryItemStyles>
     )
 }
 
-export default ImageGalleryItem;
+export default ImageGalleryItem
+

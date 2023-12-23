@@ -1,13 +1,15 @@
 import React from 'react'
-import { ButtonContainer } from './Button.styled';
+import { ButtonContainer } from '../Button/Button.styled';
 
-const Button = ({ loadNextImages }) => {
 
-    const handleLoad = () => {
-        loadNextImages();
+const Button = ({ loadMoreClick }) => {
+
+    const handleClickLoadButton = () => {
+        loadMoreClick();
     }
+
     return (
-        <ButtonContainer onClick={handleLoad}>Load more</ButtonContainer>
+        <ButtonContainer onClick={handleClickLoadButton} >Load more</ButtonContainer>
     )
 }
 

@@ -1,46 +1,44 @@
-import { Component } from 'react';
-import { SearchbarHeader, SearchForm, SearchFormButton, SearchFormInput, SearchFormIcon } from './Searchbar.styled';
+import { Component } from "react";
+import { SearchbarHeader, SearchForm, SearchFormButton, SearchFormInput, SearchFormIcon } from "../Searchbar/Searchbar.styled";
+
 
 class Searchbar extends Component {
     state = {
-        searchQuery: '',
+        searchQuery: ''
     }
 
     handleChange = ({ target: { value } }) => {
-        this.setState({ searchQuery: value });
+        this.setState({
+            searchQuery: value
+        })
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.submit(this.state.searchQuery);
         this.setState({ searchQuery: '' });
-    };
+    }
 
     render() {
         return (
-
-            <SearchbarHeader >
-                <SearchForm onSubmit={this.handleSubmit}>
+            <SearchbarHeader>
+                <SearchForm onClick={this.handleSubmit}>
                     <SearchFormButton type="submit">
                         <SearchFormIcon />
                     </SearchFormButton>
 
                     <SearchFormInput
                         type="text"
-                        name="searchQuery"
                         autoComplete="off"
                         autoFocus
                         placeholder="Search images and photos"
-                        value={this.state.searchQuery}
                         onChange={this.handleChange}
-                        required
                     />
                 </SearchForm>
             </SearchbarHeader>
-
-        )
+        );
     }
+
 }
 
-export default Searchbar;
-
+export default Searchbar

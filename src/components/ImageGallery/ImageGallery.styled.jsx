@@ -13,4 +13,3 @@ export const ImageGalleryContainer = styled.ul`
     margin-right: auto;
 
  `;
-
