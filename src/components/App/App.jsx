@@ -23,6 +23,7 @@ class App extends Component {
   }
 
   handleSetSearchQuery = (searchQuery) => {
+    if (searchQuery === '') return;
     this.setState({
       searchQuery,
       images: null,
@@ -43,7 +44,6 @@ class App extends Component {
     try {
       this.setState({ isLoading: true });
       const { hits, totalHits } = await fetchImagesWithQuery(searchQuery, page);
-      console.log("images-hits after query:", hits);
       if (hits.length === 12) {
         page === 1 && Notify.success(`Hooray! We found ${totalHits} images.`, {
           timeout: 6000,
@@ -82,16 +82,10 @@ class App extends Component {
       largeImageURL: prev.showModal ? '' : url,
       alt: prev.showModal ? '' : alt,
     }))
-    // this.setUrltoModal(url, alt);
   }
-
-  // setUrltoModal = (url, alt) => {
-  //   this.state.showModal ? this.setState({ largeImageURL: url, alt }) : this.setState({ largeImageURL: '', alt: '' });
-  // }
 
   render() {
     const { isLoading, showLoadMore, images, showModal, largeImageURL, alt } = this.state;
-    console.log("large image url: ", largeImageURL, "alt: ", alt, "show modal: ", showModal);
     return (
       <AppContainer>
         <Searchbar submit={this.handleSetSearchQuery} />

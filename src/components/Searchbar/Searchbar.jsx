@@ -22,7 +22,7 @@ class Searchbar extends Component {
     render() {
         return (
             <SearchbarHeader>
-                <SearchForm onClick={this.handleSubmit}>
+                <SearchForm onSubmit={this.handleSubmit}>
                     <SearchFormButton type="submit">
                         <SearchFormIcon />
                     </SearchFormButton>
